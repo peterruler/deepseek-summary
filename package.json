@@ -1,0 +1,30 @@
+{
+  "name": "deepseek-summary",
+  "version": "1.0.0",
+  "description": "deepseek api summary app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peterruler/deepseek-summary.git"
+  },
+  "keywords": [
+    "nodejs",
+    "ai",
+    "summary"
+  ],
+  "author": "peter stroessler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/peterruler/deepseek-summary/issues"
+  },
+  "homepage": "https://github.com/peterruler/deepseek-summary#readme",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}

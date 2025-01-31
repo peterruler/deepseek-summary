@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textzusammenfassung mit DeepSeek API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            color: #444;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .summary {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Textzusammenfassung mit DeepSeek API</h1>
+    <form id="summarizeForm">
+        <textarea id="textInput" placeholder="Geben Sie hier den Text ein, den Sie zusammenfassen möchten..."></textarea>
+        <button type="submit">Zusammenfassen</button>
+    </form>
+    <div class="summary">
+        <h2>Zusammenfassung:</h2>
+        <p id="summaryOutput">Hier wird die Zusammenfassung angezeigt.</p>
+    </div>
+
+    <script>
+        // JavaScript, um das Formular zu verarbeiten und die Zusammenfassung anzuzeigen
+        document.getElementById('summarizeForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Verhindert das Neuladen der Seite
+
+            const text = document.getElementById('textInput').value;
+            const summaryOutput = document.getElementById('summaryOutput');
+
+            if (!text) {
+                summaryOutput.textContent = 'Bitte geben Sie einen Text ein.';
+                return;
+            }
+
+            try {
+                // Anfrage an den Express-Server senden
+                const response = await fetch('/summarize', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ text: text })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Fehler bei der Anfrage.');
+                }
+
+                const data = await response.json();
+                summaryOutput.textContent = data.summary || 'Keine Zusammenfassung erhalten.';
+            } catch (error) {
+                console.error('Fehler:', error);
+                summaryOutput.textContent = 'Fehler bei der Zusammenfassung des Textes.';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -12,6 +12,12 @@
 # Installation
  - `npm install`
 
+# Umgebungsvariabeln setzen
+```
+DEEPSEEK_API_KEY=der_deepseek_api_schlüssel
+PORT=3000
+```
+
 # Starten der Applikation
  - `npm start`
 
